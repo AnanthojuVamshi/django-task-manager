@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tasks/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<script>
+    const csrfToken = "{{ csrf_token }}";
+</script>
+<body>
+
+    <div class="container">
+        <h1>Task Manager</h1>
+
+        <input type="text" id="taskInput" placeholder="Enter task">
+        <button id="addBtn">Add Task</button>
+
+        <ul id="taskList">
+            {% for task in tasks %}
+            <li data-id="{{ task.id }}">
+                <span class="{% if task.completed %}done{% endif %}">
+                    {{ task.title }}
+                </span>
+                <button class="completeBtn">Complete</button>
+                <button class="deleteBtn">Delete</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="{% static 'tasks/scripts.js' %}"></script>
+</body>
+</html>
